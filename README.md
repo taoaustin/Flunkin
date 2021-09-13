@@ -14,6 +14,7 @@ __TO DO/FIX__
 __Plans/Thins to consider__
 - Fade-in (osu!mania)
 - Variable scroll speed
+- Note timing bar
 - Redo in Kade-Engine???
 - Suggestions are welcome!
 <br>
