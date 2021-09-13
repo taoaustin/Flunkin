@@ -4,6 +4,8 @@ Hey all! This is really just my attempts as someone who likes rhythm games to ad
 
 So far I've just added a feature that creates a save/restart point for a song in Freeplay Mode, useful to drill out any of those rougher sections, for now it's 'O' to set a savepoint, and 'P' to restart from that point. (still working out some bugs and stuff)
 
+Removed APIStuff.hx fom gitignore, just for easier compiling if anyone decides to download
+
 __TO DO/FIX__
 - <s>Fix alignment of incoming notes after a restart from save point</s>
 - <s>Only allow feature to work in FreePlay mode.</s>
