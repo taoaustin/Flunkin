@@ -6,8 +6,8 @@ So far I've just added a feature that creates a save/restart point for a song in
 
 __TO DO/FIX__
 - Fix alignment of incoming notes after a restart from save point
-- Only allow feature to word in FreePlay mode.
-- ahhhhhh whhy are the start times inconsistent :(
+- <s>Only allow feature to work in FreePlay mode.</s>
+- ahhhhhh whhy are the start times inconsistent :( (think it as to do with when i press the restart button)
 
 __Plans/Thins to consider__
 - Fade-in (osu!mania)
