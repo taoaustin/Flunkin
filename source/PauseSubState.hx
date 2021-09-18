@@ -17,10 +17,15 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Exit to menu', 'Fade out'];
+
 	var curSelected:Int = 0;
+	var isFading:Bool = PlayState.faded;
+	var fadeInOption:FlxText;
 
 	var pauseMusic:FlxSound;
+
+	var optionUpdated:Bool = false;
 
 	public function new(x:Float, y:Float)
 	{
@@ -51,15 +56,24 @@ class PauseSubState extends MusicBeatSubstate
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
+		fadeInOption = new FlxText(20, 15 + 64, 0, "Fade Out: " + isFading, 32);
+		fadeInOption.scrollFactor.set();
+		fadeInOption.setFormat(Paths.font("vcr.ttf"), 32);
+		fadeInOption.updateHitbox();
+		add(fadeInOption);
+
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
+		fadeInOption.alpha = 0;
 
 		levelInfo.x = FlxG.width - (levelInfo.width + 20);
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
+		fadeInOption.x = FlxG.width - (fadeInOption.width + 20);
 
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
+		FlxTween.tween(fadeInOption, {alpha: 1, y: fadeInOption.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.7});
 
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
@@ -79,6 +93,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
+		FlxG.watch.add(this, "isFading");
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 
@@ -88,6 +103,9 @@ class PauseSubState extends MusicBeatSubstate
 		var downP = controls.DOWN_P;
 		var accepted = controls.ACCEPT;
 
+		var leftP = controls.LEFT_P;
+		var rightP = controls.RIGHT_P;
+
 		if (upP)
 		{
 			changeSelection(-1);
@@ -95,6 +113,13 @@ class PauseSubState extends MusicBeatSubstate
 		if (downP)
 		{
 			changeSelection(1);
+		}
+		if (menuItems[curSelected] == "Fade out")
+		{
+			if (rightP || leftP) {
+				changeFadeOption();
+				optionUpdated = true;
+			}
 		}
 
 		if (accepted)
@@ -109,6 +134,14 @@ class PauseSubState extends MusicBeatSubstate
 					FlxG.resetState();
 				case "Exit to menu":
 					FlxG.switchState(new MainMenuState());
+				case "Fade out":
+					if (optionUpdated) 
+					{
+						PlayState.faded = isFading;
+						FlxG.resetState();
+					}
+
+					
 			}
 		}
 
@@ -151,5 +184,12 @@ class PauseSubState extends MusicBeatSubstate
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
+	}
+
+	function changeFadeOption():Void
+	{
+		isFading = !isFading;
+		fadeInOption.text = "Fade Out: " + isFading;
+		fadeInOption.updateHitbox();
 	}
 }

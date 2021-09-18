@@ -124,6 +124,7 @@ class PlayState extends MusicBeatState
 	var saveStateTime:Float = 0;     // the part of the music we're restarting to in our save state, in milliseconds
 	var saveStateNoteIndex:Int = 0;
 	var nextUnspawnedNote:Int = 0;
+	public static var faded:Bool = false;
 	
 
 
@@ -143,6 +144,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
@@ -1645,7 +1647,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-	if (unspawnNotes[nextUnspawnedNote] != null)
+		if (unspawnNotes[nextUnspawnedNote] != null)
 		{
 			if (unspawnNotes[nextUnspawnedNote].strumTime - Conductor.songPosition < 1500)
 			{
@@ -1677,6 +1679,10 @@ class PlayState extends MusicBeatState
 				}
 
 				daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
+				if (daNote.visible && faded)
+				{
+					daNote.alpha -= 0.02;
+				}
 
 				// i am so fucking sorry for this if condition
 				if (daNote.isSustainNote
@@ -1690,6 +1696,7 @@ class PlayState extends MusicBeatState
 					daNote.clipRect = swagRect;
 				}
 
+				//CPU NOTES
 				if (!daNote.mustPress && daNote.wasGoodHit)
 				{
 					if (SONG.song != 'Tutorial')
