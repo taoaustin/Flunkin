@@ -12,7 +12,7 @@ __TO DO/FIX__
 - ahhhhhh whhy are the start times inconsistent :( (think it as to do with when i press the restart button)
 
 __Plans/Thins to consider__
-- Fade-in (osu!mania)
+- Fade-in/out (in prog.) (osu!mania)
 - Variable scroll speed
 - Note timing bar
 - Redo in Kade-Engine???
