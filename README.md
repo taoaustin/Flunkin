@@ -9,7 +9,9 @@ Removed APIStuff.hx fom gitignore, just for easier compiling if anyone decides t
 __TO DO/FIX__
 - <s>Fix alignment of incoming notes after a restart from save point</s>
 - <s>Only allow feature to work in FreePlay mode.</s>
-- ahhhhhh whhy are the start times inconsistent :( (think it as to do with when i press the restart button)
+- Hold 'O' to unset, flash RED, restart will set you back to beginning
+- Fix health decreasing when reseting, (reset score maybe)
+- reset, notes come in inconsistent times :( (think it has to do w/ the current beat/section i'm in before i reset)
 
 __Plans/Thins to consider__
 - Fade-in/out (in prog.) (osu!mania)
