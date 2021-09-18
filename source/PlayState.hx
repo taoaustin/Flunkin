@@ -124,6 +124,7 @@ class PlayState extends MusicBeatState
 	var saveStateTime:Float = 0;     // the part of the music we're restarting to in our save state, in milliseconds
 	var saveStateNoteIndex:Int = 0;
 	var nextUnspawnedNote:Int = 0;
+	
 
 
 	// how big to stretch the pixel art assets
@@ -1428,18 +1429,20 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-		if (!isStoryMode &&FlxG.keys.justPressed.O && startedCountdown) // sets save state
+		if (!isStoryMode && FlxG.keys.justPressed.O && startedCountdown) // sets save state
 		{
 			saveStateTime = FlxG.sound.music.time;
 			saveStateNoteIndex = nextUnspawnedNote;
 			trace("CURRENT TIME OF THE SONG:" + saveStateTime);
 			saveStateFlag = true;
+			FlxG.camera.flash(FlxColor.GREEN, 0.5);
 
 		}
 
-		if (!isStoryMode && FlxG.keys.justPressed.P && startedCountdown && saveStateFlag)
+		if (!isStoryMode && FlxG.keys.justPressed.P && startedCountdown /*&& saveStateFlag*/)
 		{
 			restartFromSaveState();
+			FlxG.camera.flash(FlxColor.WHITE, 0.5);
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
