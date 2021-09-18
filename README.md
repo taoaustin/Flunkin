@@ -11,7 +11,7 @@ __TO DO/FIX__
 - <s>Only allow feature to work in FreePlay mode.</s>
 - Hold 'O' to unset, flash RED, restart will set you back to beginning
 - Fix health decreasing when reseting, (reset score maybe)
-- ahhhhhh whhy are the start times inconsistent :( (think it as to do with when i press the restart button)
+- reset, notes come in inconsistent times :( (think it has to do w/ the current beat/section i'm in before i reset)
 
 __Plans/Thins to consider__
 - Fade-in (osu!mania)
