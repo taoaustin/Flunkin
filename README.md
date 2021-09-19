@@ -15,7 +15,7 @@ __TO DO/FIX__
 - Song json formatting, why are bpm, sections, notes repeated at the end of the file? + sections=0 in "song" while sections = correct# outside of songs???
 
 __Plans/Thins to consider__
-- Fade-in (osu!mania)
+- Fade-in/out (in prog.) (osu!mania)
 - Variable scroll speed
 - Note timing bar
 - Redo in Kade-Engine???

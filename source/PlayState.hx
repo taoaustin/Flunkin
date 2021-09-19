@@ -124,6 +124,7 @@ class PlayState extends MusicBeatState
 	var saveStateTime:Float = 0;     // the part of the music we're restarting to in our save state, in milliseconds
 	var saveStateNoteIndex:Int = 0;
 	var nextUnspawnedNote:Int = 0;
+	public static var faded:Bool = false;
 	
 
 
@@ -143,6 +144,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
@@ -1645,7 +1647,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-	if (unspawnNotes[nextUnspawnedNote] != null)
+		if (unspawnNotes[nextUnspawnedNote] != null)
 		{
 			if (unspawnNotes[nextUnspawnedNote].strumTime - Conductor.songPosition < 1500)
 			{
@@ -1655,7 +1657,7 @@ class PlayState extends MusicBeatState
 				nextUnspawnedNote++;
 
 				var index:Int = unspawnNotes.indexOf(dunceNote);    // this part was kinda pointless even in the old implementation since the index would always be 0, 
-				trace(index);                                       // 	this is because unspawnNotes would be sorted according to strumTime in the first place --austin
+				//trace(index);                                       // 	this is because unspawnNotes would be sorted according to strumTime in the first place --austin
 				//trace(dunceNote.alive);
 				// unspawnNotes.splice(index, 1);
 			}
@@ -1677,6 +1679,14 @@ class PlayState extends MusicBeatState
 				}
 
 				daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
+				if (daNote.visible && (daNote.y <= (FlxG.width / 2)) && faded)
+				{
+					// x_0 = strumLine.y + 50 (~100), y_0 = 0      x_1 = FlxG.width / 2, y_1 = 1
+					// I want opacity to go from 1 to 0 from about halfway up the screen, to 50px before the strumLine, subject to change/tweaks
+					var slope:Float = 1 / ((FlxG.width / 2) - (strumLine.y + 50));   // slope
+					daNote.alpha = slope * (daNote.y - (strumLine.y)) + 0;           // just a linear function in the form y = m(x - x_0) + y_0
+
+				}
 
 				// i am so fucking sorry for this if condition
 				if (daNote.isSustainNote
@@ -1690,6 +1700,7 @@ class PlayState extends MusicBeatState
 					daNote.clipRect = swagRect;
 				}
 
+				//CPU NOTES
 				if (!daNote.mustPress && daNote.wasGoodHit)
 				{
 					if (SONG.song != 'Tutorial')
