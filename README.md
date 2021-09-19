@@ -12,6 +12,7 @@ __TO DO/FIX__
 - Hold 'O' to unset, flash RED, restart will set you back to beginning
 - Fix health decreasing when reseting, (reset score maybe)
 - reset, notes come in inconsistent times :( (think it has to do w/ the current beat/section i'm in before i reset)
+- Song json formatting, why are bpm, sections, notes repeated at the end of the file? + sections=0 in "song" while sections = correct# outside of songs???
 
 __Plans/Thins to consider__
 - Fade-in (osu!mania)
