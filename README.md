@@ -7,6 +7,8 @@ Hey all! This is really just my attempts as someone who likes rhythm games to ad
 
 Removed APIStuff.hx fom gitignore, just for easier compiling if anyone decides to download
 
+Download from Gamebanana! https://gamebanana.com/mods/322811
+
 __TO DO/FIX__
 - <s>Fix alignment of incoming notes after a restart from save point</s>
 - <s>Only allow feature to work in FreePlay mode.</s>
